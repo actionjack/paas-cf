@@ -6,8 +6,8 @@ name: concourse
 
 releases:
   - name: concourse
-    url: https://bosh.io/d/github.com/concourse/concourse?v=2.2.1
-    sha1: 879d5cb45d12f173ff4c7912c7c7cdcd3e18c442
+    url: https://github.com/alphagov/paas-concourse/releases/download/v2.2.1-gds/concourse-2.2.1.dev.2.tgz
+    sha1: 7df4fa203ab7e90afe13b2683aa628f18578f016
   - name: garden-runc
     url: https://bosh.io/d/github.com/cloudfoundry/garden-runc-release?v=0.8.0
     sha1: 20e98ea84c8f4426bba00bbca17d931e27d3c07d
