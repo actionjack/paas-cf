@@ -82,6 +82,9 @@ jobs:
           basic_auth_username: admin
           basic_auth_password: (( grab secrets.concourse_atc_password ))
 
+          riemann:
+            tags: (( grab meta.datadog_tags ))
+
           postgresql:
             address: 127.0.0.1:5432
             database: atc
