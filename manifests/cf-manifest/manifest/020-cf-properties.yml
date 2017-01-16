@@ -516,6 +516,8 @@ properties:
         db_driver: postgres
       dropsonde_port: (( grab properties.metron_agent.dropsonde_incoming_port ))
       require_ssl: true
+      convergence:
+          repeat_interval_in_seconds: 50000000000
 
     file_server:
       dropsonde_port: (( grab properties.metron_agent.dropsonde_incoming_port ))
