@@ -1,11 +1,6 @@
 #!/bin/bash
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 
-if [ -z "$AWS_SESSION_TOKEN" ]; then
-  echo "No temporary AWS credentials found, please run create_sts_token.sh"
-  exit 255;
-fi
-
 if [ -z "$AWS_ACCOUNT" ]; then
   echo "No AWS_ACCOUNT specified, please populate the environment variable"
   exit 255;
