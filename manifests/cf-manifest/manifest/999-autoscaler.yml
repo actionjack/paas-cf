@@ -1,0 +1,189 @@
+---
+releases:
+  - name: app-autoscaler
+    version: latest
+  - name: postgres
+    url: https://bosh.io/d/github.com/cloudfoundry/postgres-release?v=11
+    version: '11'
+    sha1: b9cbcbfa53c870441f55431ee4ef8f63f860b03a
+
+
+jobs:
+  - name: postgres
+    azs:
+      - z1
+    templates:
+      - name: consul_agent
+        release: cf
+      - name: postgres
+        release: postgres
+    instances: 1
+    update:
+      serial: true
+    stemcell: small
+    vm_type: small
+    networks:
+      - name: cf
+    properties:
+      databases: (( default_db ))
+
+ # APIServer Instance Group
+  
+  - name: apiserver
+    azs:
+      - z1
+    templates:
+      - name: consul_agent
+        release: cf
+      - name: apiserver
+        release: app-autoscaler
+    instances: 1
+    networks:
+      - name: cf
+    stemcell: small
+    vm_type: small
+    properties:
+      api_server: (( api_server_properties ))
+      policy_db: (( policydb ))
+
+# Scheduler Instance Group
+
+  - name: scheduler
+    azs:
+      - z1
+    templates:
+      - name: consul_agent
+        release: cf
+      - name: scheduler
+        properties:
+          scheduler: (( scheduler_properties ))
+          scheduler_db: (( schedulerdb ))
+        release: app-autoscaler
+    instances: 1
+    networks:
+      - name: cf
+    stemcell: small
+    vm_type: small
+
+# Service-Broker Instance Group
+
+  - name: servicebroker
+    azs:
+      - z1
+    templates:
+      - name: consul_agent
+        release: cf
+      - name: servicebroker
+        release: app-autoscaler
+    instances: 1
+    networks:
+      - name: cf
+    stemcell: small
+    vm_type: default
+    properties:
+      service_broker: (( service_broker_properties ))
+      binding_db: (( bindingdb ))
+
+# Pruner Instance Group
+
+  - name: pruner
+    azs:
+      - z1
+    templates:
+      - name: consul_agent
+        release: cf
+      - name: pruner
+        release: app-autoscaler
+    instances: 1
+    networks:
+      - name: cf
+    stemcell: small
+    vm_type: default
+    properties:
+      appmetrics_db: (( appmetricsdb ))
+      instancemetrics_db: (( instancemetricsdb ))
+      scalingengine_db: (( scalingenginedb ))
+      pruner: (( pruner_properties ))
+
+# Metric-collector Instance Group
+
+  - name: metricscollector
+    azs:
+      - z1
+    templates:
+      - name: consul_agent
+        release: cf
+      - name: metricscollector
+        release: app-autoscaler
+    instances: 1
+    networks:
+      - name: cf
+    stemcell: small
+    vm_type: default
+    properties:
+      instancemetrics_db: (( instancemetricsdb ))
+      policy_db: (( policydb ))
+      cf: (( cf_properties ))
+      metricscollector: (( metricscollector_properties ))
+
+# Event-Generator Instance Group
+
+  - name: eventgenerator
+    azs:
+      - z1
+    templates:
+      - name: consul_agent
+        release: cf
+      - name: eventgenerator
+        release: app-autoscaler
+    instances: 1
+    networks:
+      - name: cf
+    stemcell: small
+    vm_type: default
+    properties:
+      appmetrics_db: (( appmetricsdb ))
+      policy_db: (( policydb ))
+      eventgenerator: (( eventgenerator_properties ))
+
+# Scaling-Engine Instance Group
+
+  - name: scalingengine
+    azs:
+      - z1
+    templates:
+      - name: consul_agent
+        release: cf
+      - name: scalingengine
+        release: app-autoscaler
+    instances: 1
+    networks:
+      - name: cf
+    stemcell: small
+    vm_type: default
+    properties:
+      scalingengine_db: (( scalingenginedb ))
+      scheduler_db: (( schedulerdb ))
+      policy_db: (( policydb ))
+      cf: (( cf_properties ))
+      scalingengine: (( scalingengine_properties ))
+
+cf_properties: (( merge ))
+api_server_properties: (( merge ))
+scheduler_properties: (( merge ))
+service_broker_properties: (( merge ))
+config_from_cf: (( merge ))
+pruner_properties: ((merge))
+metricscollector_properties: (( merge ))
+eventgenerator_properties: (( merge ))
+scalingengine_properties: (( merge ))
+default_db: (( merge ))
+instance_count_overrides: (( merge || nil ))
+database: (( merge || default_db ))
+policydb: (( merge || database ))
+schedulerdb: (( merge || database ))
+scalingenginedb: (( merge || database ))
+appmetricsdb: (( merge || database ))
+instancemetricsdb: (( merge || database ))
+bindingdb: (( merge || database ))
+
