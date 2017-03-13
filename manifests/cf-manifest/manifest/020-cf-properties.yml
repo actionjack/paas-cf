@@ -367,6 +367,13 @@ properties:
           tokenUrl: https://www.googleapis.com/oauth2/v4/token
           issuer: https://accounts.google.com
           redirectUri: (( concat "https://login." properties.system_domain "/uaa" ))
+          redirectURI: (( concat "https://login." properties.system_domain "/uaa" ))
+          redirectUrl: (( concat "https://login." properties.system_domain "/uaa" ))
+          redirectURL: (( concat "https://login." properties.system_domain "/uaa" ))
+          requestUri: (( concat "https://login." properties.system_domain "/uaa" ))
+          requestURI: (( concat "https://login." properties.system_domain "/uaa" ))
+          requestUrl: (( concat "https://login." properties.system_domain "/uaa" ))
+          requestURL: (( concat "https://login." properties.system_domain "/uaa" ))
           scopes:
             - openid
             - email
