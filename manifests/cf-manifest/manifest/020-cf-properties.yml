@@ -366,20 +366,13 @@ properties:
           authUrl: https://accounts.google.com/o/oauth2/v2/auth
           tokenUrl: https://www.googleapis.com/oauth2/v4/token
           issuer: https://accounts.google.com
-          redirectUri: (( concat "https://login." properties.system_domain "/uaa" ))
-          redirectURI: (( concat "https://login." properties.system_domain "/uaa" ))
           redirectUrl: (( concat "https://login." properties.system_domain "/uaa" ))
-          redirectURL: (( concat "https://login." properties.system_domain "/uaa" ))
-          requestUri: (( concat "https://login." properties.system_domain "/uaa" ))
-          requestURI: (( concat "https://login." properties.system_domain "/uaa" ))
-          requestUrl: (( concat "https://login." properties.system_domain "/uaa" ))
-          requestURL: (( concat "https://login." properties.system_domain "/uaa" ))
           scopes:
             - openid
             - email
           linkText: Login with Google
           showLinkText: true
-          addShadowUserOnLogin: true
+          addShadowUserOnLogin: false
           relyingPartyId: (( grab $OAUTH_CLIENT_ID ))
           relyingPartySecret: (( grab $OAUTH_CLIENT_ID ))
           skipSslValidation: true
