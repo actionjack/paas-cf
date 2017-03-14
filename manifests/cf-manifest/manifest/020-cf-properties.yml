@@ -374,7 +374,7 @@ properties:
           showLinkText: true
           addShadowUserOnLogin: false
           relyingPartyId: (( grab $OAUTH_CLIENT_ID ))
-          relyingPartySecret: (( grab $OAUTH_CLIENT_ID ))
+          relyingPartySecret: (( grab $OAUTH_CLIENT_SECRET ))
           skipSslValidation: true
           attributeMappings:
             user_name: email
