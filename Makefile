@@ -170,7 +170,7 @@ upload-datadog-secrets: check-env ## Decrypt and upload Datadog credentials to S
 	@scripts/upload-datadog-secrets.sh
 
 .PHONY: upload-google-console-secrets
-upload-google-console-secrets: check-env ## Decrypt and upload Google Admin Console credentials to S3
+upload-google-oauth-secrets: check-env ## Decrypt and upload Google Admin Console credentials to S3
 	$(eval export OAUTH_PASSWORD_STORE_DIR?=${HOME}/.paas-pass)
 	# FIXME After it has been tested, we'd like to restrict its usage in dev.
 	# $(if ${AWS_ACCOUNT},,$(error Must set environment to ci/staging/prod))
