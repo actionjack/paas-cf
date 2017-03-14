@@ -380,8 +380,8 @@ properties:
           linkText: Login with Google
           showLinkText: true
           addShadowUserOnLogin: true
-          relyingPartyId: (( grab $GAC_CLIENT_ID ))
-          relyingPartySecret: (( grab $GAC_CLIENT_ID ))
+          relyingPartyId: (( grab $OAUTH_CLIENT_ID ))
+          relyingPartySecret: (( grab $OAUTH_CLIENT_ID ))
           skipSslValidation: true
           attributeMappings:
             user_name: email
