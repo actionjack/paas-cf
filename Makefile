@@ -171,11 +171,11 @@ upload-datadog-secrets: check-env ## Decrypt and upload Datadog credentials to S
 
 .PHONY: upload-google-console-secrets
 upload-google-console-secrets: check-env ## Decrypt and upload Google Admin Console credentials to S3
-	$(eval export GAC_PASSWORD_STORE_DIR?=${HOME}/.paas-pass)
+	$(eval export OAUTH_PASSWORD_STORE_DIR?=${HOME}/.paas-pass)
 	# FIXME After it has been tested, we'd like to restrict its usage in dev.
 	# $(if ${AWS_ACCOUNT},,$(error Must set environment to ci/staging/prod))
-	$(if ${GAC_PASSWORD_STORE_DIR},,$(error Must pass GAC_PASSWORD_STORE_DIR=<path_to_password_store>))
-	$(if $(wildcard ${GAC_PASSWORD_STORE_DIR}),,$(error Password store ${GAC_PASSWORD_STORE_DIR} does not exist))
+	$(if ${OAUTH_PASSWORD_STORE_DIR},,$(error Must pass OAUTH_PASSWORD_STORE_DIR=<path_to_password_store>))
+	$(if $(wildcard ${OAUTH_PASSWORD_STORE_DIR}),,$(error Password store ${OAUTH_PASSWORD_STORE_DIR} does not exist))
 	@scripts/upload-google-console-secrets.sh
 
 upload-tracker-token: check-env ## Decrypt and upload Pivotal tracker API token to S3
